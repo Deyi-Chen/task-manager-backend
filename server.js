@@ -42,15 +42,18 @@ app.put("/api/tasks/:id", async (req, res) => {
   res.json(task);
 });
 
-app.delete("/api/tasks/:id", async (req, res) => {
-  await Task.findByIdAndDelete(req.params.id);
-  res.json({ message: "Deleted" });
-});
 
 app.delete("/api/tasks/clear-completed", async (req, res) => {
   await Task.deleteMany({ completed: true });
   res.json({ message: "Cleared completed tasks" });
 });
+
+
+app.delete("/api/tasks/:id", async (req, res) => {
+  await Task.findByIdAndDelete(req.params.id);
+  res.json({ message: "Deleted" });
+});
+
 
 // Start server
 const PORT = process.env.PORT || 3000;
